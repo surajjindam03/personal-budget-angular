@@ -117,8 +117,8 @@ export class HomepageComponent implements OnInit {
 
   ngOnInit(): void {
     if (
-      this.dataSource.datasets[0].data.length == 0 ||
-      this.newDataSource.length == 0
+      this.dataService.getDataSource().length == 0 ||
+      this.dataService.getNewDataSource().length == 0
     ) {
       this.dataService.fetchDataFromBackend().subscribe((res: any) => {
         for (var i = 0; i < res.myBudget.length; i++) {
@@ -139,6 +139,11 @@ export class HomepageComponent implements OnInit {
         this.createColors();
         this.drawChart();
       });
+    } else {
+      this.createChart();
+      this.createSvg();
+      this.createColors();
+      this.drawChart();
     }
   }
 }
